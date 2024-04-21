@@ -7,6 +7,7 @@ html {
 }
 
 body {
+    font-family: "Pixelify Sans", sans-serif;
     background-image: url(../images/background-image.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -15,7 +16,6 @@ body {
     margin-right: 10%;
     height: 80vh;
 }
-
 
 /* -------- NAVBAR -------- */
 #website-title {
@@ -81,7 +81,6 @@ body {
     border: none;
     color: white;
     font-size: 25px;
-    padding-right: 60px;
 }
 
 .subnav-content {
