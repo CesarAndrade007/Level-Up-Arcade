@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level-Up Arcade - Home</title>
+    <title>Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/home.css">
@@ -12,16 +12,17 @@
     <header>
         <nav class="desktop-nav">
             <ul>
-                <div id="website-title">Level-Up Arcade  <i class="fa fa-gamepad"></i></div>
+                <li id="website-title">
+                    Level-Up Arcade <i class="fa fa-gamepad"></i>
+                </li>
                 <li><a href="home.html">Home</a></li>
-                <li>
-                    <div class="subnav">
-                        <button>Games <i class="fa fa-caret-down"></i></button>
-                        <div class="subnav-content">
-                            <a href="">Sudoku</a>
-                            <a href="">Space Invaders</a>
-                        </div>
-                    </div>
+                <li class="subnav">
+                    <button class="subnav-button">Games <i class="fa fa-caret-down"></i></button>
+                    <ul class="subnav-content">
+                        <li><a href="sudoku.html">Sudoku</a></li>
+                        <li><a href="space-invaders.html">Space Invaders</a></li>
+                        <li><a href="matching.html">Matching</a></li>
+                    </ul>
                 </li>
                 <li><a href="">About</a></li>
             </ul>
@@ -36,15 +37,25 @@
                    Fill a 9x9 grid with numbers 1 through 9 without repeating them in any row, column, or 3x3 box.
                    It's the perfect blend of strategy and challenge.
                 </p>
+                <a class="home-play-button" href="sudoku.html">Play Now!</a>
             </div>
             <div class="card-container">
                 <h1>Space Invaders</h1>
                 <img src="../images/placeholder-img.png" alt="Space Invaders" title="Sudoku">
+                <p>
+                    Use your laser cannon to shoot down invaders before they reach the ground, but dodge their return fire.
+                    Enjoy retro graphics, addictive gameplay, and nostalgic sound effects in this timeless game.
+                </p>
+                <a class="home-play-button" href="space-invaders.html">Play Now!</a>
             </div>
             <div class="card-container">
                 <h1>Matching</h1>
                 <img src="../images/placeholder-img.png" alt="Matching" title="Sudoku">
-                <p>Testing</p>
+                <p>
+                    Flip cards to find pairs with matching symbols. The faster you match, the higher your score. 
+                    Enjoy a simple yet addictive gameplay experience that's great for players of all ages. Can you match them all?
+                </p>
+                <a class="home-play-button" href="matching.html">Play Now!</a>
             </div>
         </section>
 

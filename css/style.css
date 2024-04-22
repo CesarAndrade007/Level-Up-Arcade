@@ -18,7 +18,7 @@ body {
 }
 
 /* -------- NAVBAR -------- */
-#website-title {
+#website-title{
     color: rgb(22, 216, 61);
     font-family: "Pixelify Sans", sans-serif;
     text-decoration: solid;
@@ -46,8 +46,13 @@ body {
     position: relative;
     display: inline-block;
     padding: 5px 0;
+    transition: color 0.2s;
   }
-  
+
+  .desktop-nav a:hover {
+    color: rgb(22, 216, 61);
+  }
+
   a,
   a:visited,
   a:active,
@@ -70,17 +75,16 @@ body {
 
 
 .subnav {
-    float: right;
-    margin-top: 5px;
+    position: relative;
 }
 
-.subnav button {
+.subnav-button {
     font-family: "Pixelify Sans", sans-serif;
-    display: inline-block;
     background-color: #000000;
     border: none;
     color: white;
     font-size: 25px;
+    cursor: pointer;
 }
 
 .subnav-content {
@@ -94,7 +98,7 @@ body {
     z-index: 5;
 }
 
-.subnav-content a {
+.subnav-content > li a {
     color: white;
     font-size: 20px;
     width: 160px;
@@ -111,7 +115,6 @@ body {
 }
 
   /* -------- FOOTER -------- */
-  
   footer {
     overflow: hidden;
     position: fixed;
