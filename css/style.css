@@ -135,16 +135,27 @@ ul li {
   display: none;
 }
 
-
 /* -------- GAME SANDBOX -------- */
 .gameContainer {
-  padding-top: 160px;
+  padding-top: 100px;
 }
+
+.game-heading {
+  font-size: 40px;
+  margin-bottom: 5px;
+  color: rgb(22, 216, 61);
+  text-align: center;
+}
+
 .game-sandbox {
-  width: 600px;
-  height: 60vh;
+  width: 40%;
+  height: 55vh;
   margin: auto;
-  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: 2px solid black;
+  align-items: center;
+  overflow: hidden;
+  background-color: rgb(50, 50, 50);
 }
 
 /* -------- FOOTER -------- */
