@@ -14,15 +14,24 @@ body {
   background-position: center;
   margin-left: 10%;
   margin-right: 10%;
-  height: 80vh;
+  height: 100vh;
 }
 
 img {
-  width: 250px;
+  width: 300px;
   border: 5px solid rgb(15, 15, 15);
   border-radius: 20px;
 }
 
+/* -------- ANIMATIONS --------*/
+@keyframes glow {
+  from {
+    text-shadow: 0 0 3px rgb(14, 134, 38), 0 0 8px rgb(14, 134, 38), 0 0 11px rgb(14, 134, 38), 0 0 13px rgb(14, 134, 38), 0 0 16px rgb(14, 134, 38);
+  }
+  to {
+    text-shadow: 0 0 5px rgb(5, 73, 19), 0 0 10px rgb(5, 73, 19), 0 0 12px rgb(5, 73, 19), 0 0 14px rgb(5, 73, 19), 0 0 18px rgb(5, 73, 19);
+  }
+}
 
 /* -------- NAVBAR -------- */
 #website-title {
@@ -33,6 +42,7 @@ img {
   font-size: 35px;
   float: left;
   overflow: hidden;
+  animation: glow 1s ease-in-out infinite alternate;
 }
 
 .desktop-nav {
@@ -142,5 +152,5 @@ footer {
 
 #copyright {
   color: white;
-  font-size: 25px;
+  font-size: 20px;
 }
