@@ -96,10 +96,10 @@ ul li {
 
 .subnav-button {
   font-family: "Pixelify Sans", sans-serif;
+  font-size: 25px;
   background-color: #000000;
   border: none;
   color: white;
-  font-size: 25px;
   cursor: pointer;
 }
 
@@ -109,7 +109,7 @@ ul li {
   text-align: center;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  padding: 10px;
+  padding: 5px;
   background-color: rgb(58, 57, 57);
   z-index: 5;
 }
@@ -135,6 +135,17 @@ ul li {
   display: none;
 }
 
+
+/* -------- GAME SANDBOX -------- */
+.gameContainer {
+  padding-top: 160px;
+}
+.game-sandbox {
+  width: 600px;
+  height: 60vh;
+  margin: auto;
+  background-color: rgb(255, 255, 255);
+}
 
 /* -------- FOOTER -------- */
 footer {
