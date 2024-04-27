@@ -6,6 +6,7 @@
     <title>Space Invaders</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/space-invader.css">
 </head>
 <body>
     <header>
@@ -28,8 +29,22 @@
     </header>
     <main>
         <section class="gameContainer">
-            <h1 class="game-heading">Space Invaders</h1>
-            <div class="game-sandbox"></div>
+            <h1 class="game-heading"></h1>
+            <div class="game-sandbox">
+                <h1 id="gameTitle">Space Invaders</h1>
+                <div id="shipMovement">
+                    <img id="enemy-icon" src="../assets/space-invaders/enemy.png" alt="enemy-ship">
+                </div>
+                <div id="gameInstructions">
+                    <div>
+                        Arrow Keys to Move
+                        <br>
+                        Space to Shoot
+                    </div>
+                </div>
+                <button id="startGame">Start Game</button>
+
+            </div>
         </section>
     </main>
     <footer>

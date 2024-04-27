@@ -1,0 +1,65 @@
+
+@keyframes updown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes leftright {
+    0% {
+        transform: translateX(-200px) ;
+    }
+    100% {
+        transform: translateX(200px) rotate(180deg);
+    }
+}
+
+
+.game-sandbox {
+    background-image: url(../assets/space-invaders/space.jpg);
+    width: 600;
+    height: 60vh;
+    text-align: center;
+}
+
+
+#gameTitle {
+    color: rgb(4, 211, 56);
+    font-size: 50px;
+    text-shadow: 0 0 20px rgb(0, 220, 44);
+    animation: updown 1s ease-in-out infinite alternate;
+}
+
+#gameInstructions {
+    margin-top: 40px;
+    font-size: 25px;
+    color: rgb(248, 202, 63);
+    text-align: center;
+    animation: updown 3s ease-in-out infinite alternate;
+}
+
+#shipMovement {
+    padding: 20px;
+}
+
+#enemy-icon {
+    border: none;
+    width: 100px;
+    height: auto;
+    animation: leftright 3s ease-in-out infinite alternate;
+}
+
+#startGame {
+    font-size: 20px;
+    font-family: inherit;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    margin-top: 50px;
+    padding: 10px 40px;
+    background-color: rgb(0, 126, 25);
+    animation: updown 8s ease-in-out infinite alternate;
+}
