@@ -1,4 +1,4 @@
-
+/* -------- ANIMATIONS PORTION -------- */
 @keyframes updown {
     0%, 100% {
         transform: translateY(0);
@@ -17,14 +17,13 @@
     }
 }
 
-
+/* -------- GAME SECTION -------- */  
 .game-sandbox {
     background-image: url(../assets/space-invaders/space.jpg);
     width: 600;
     height: 60vh;
     text-align: center;
 }
-
 
 #gameTitle {
     color: rgb(4, 211, 56);
@@ -52,6 +51,12 @@
     animation: leftright 3s ease-in-out infinite alternate;
 }
 
+#keyboard-arrows-img, #spacebar-img {
+    border: none;
+    width: 100px;
+    height: auto;
+}
+
 #startGame {
     font-size: 20px;
     font-family: inherit;
@@ -62,4 +67,8 @@
     padding: 10px 40px;
     background-color: rgb(0, 126, 25);
     animation: updown 8s ease-in-out infinite alternate;
+}
+
+#startGame:hover {
+    background-color: rgb(0, 65, 13);
 }

@@ -1,4 +1,4 @@
-/************ ANIMATIONS PORTION ***************/
+/* -------- ANIMATIONS PORTION -------- */
 @keyframes slidein {
   0% {
     transform: translateX(-40px);
