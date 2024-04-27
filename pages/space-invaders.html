@@ -29,20 +29,20 @@
     </header>
     <main>
         <section class="gameContainer">
-            <h1 class="game-heading"></h1>
             <div class="game-sandbox">
-                <h1 id="gameTitle">Space Invaders</h1>
-                <div id="shipMovement">
-                    <img id="enemy-icon" src="../assets/space-invaders/enemy.png" alt="enemy-ship">
-                </div>
-                <div id="gameInstructions">
-                    <div>
-                        Arrow Keys to Move <img id="keyboard-arrows-img" src="../assets/space-invaders/arrows.png" alt="keyboard-arrows"><br>
-                        Space to Shoot <img id="spacebar-img" src="../assets/space-invaders/spacebar.png" alt="spacebar">
+                <div id="game-block">
+                    <h1 id="gameTitle">Space Invaders</h1>
+                    <div id="shipMovement">
+                        <img id="enemy-icon" src="../assets/space-invaders/enemy.png" alt="enemy-ship">
                     </div>
+                    <div id="gameInstructions">
+                        <div>
+                            Arrow Keys to Move <img id="keyboard-arrows-img" src="../assets/space-invaders/arrows.png" alt="keyboard-arrows"><br>
+                            Space to Shoot <img id="spacebar-img" src="../assets/space-invaders/spacebar.png" alt="spacebar">
+                        </div>
+                    </div>
+                    <button id="startGame" onclick="startGame()">Start Game</button>
                 </div>
-                <button id="startGame">Start Game</button>
-
             </div>
         </section>
     </main>
@@ -53,5 +53,6 @@
             Developed by: Cesar Lopez-Andrade
         </strong>
     </footer>
+    <script src="../js/space-invaders.js"></script>
 </body>
 </html>
