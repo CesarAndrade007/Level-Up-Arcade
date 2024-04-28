@@ -1,3 +1,7 @@
+/* 
+    Background Image: https://www.freepik.com/free-vector/gradient-white-monochrome-background_15185920.htm#query=sleek%20backgrounds&position=1&from_view=keyword&track=ais&uuid=1f592f97-79ad-4b3d-8c08-b98082aa40dd
+*/
+
 /* -------- ANIMATIONS -------- */
 @keyframes flip {
     0% {
@@ -19,7 +23,6 @@
         transform: translateY(-20px);
     }
 }
-
 
 /* -------- START SCREEN -------- */
 .game-sandbox {
