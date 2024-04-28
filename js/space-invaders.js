@@ -1,7 +1,12 @@
 "use strict"
+
+// Global Variables for Game Settings
 const globalContainer = document.querySelector(".game-sandbox");
 const playerSpeed = 2;
 const bulletSpeed = 1;
+const stepSize = 10;
+const dropSize = 20;
+const enemyMoveInterval = 400;
 
 class Player {
     constructor(container) {
@@ -10,6 +15,22 @@ class Player {
         this.player.id = "player";
         this.player.src = "../assets/space-invaders/enemy-game.png";
         this.container.appendChild(this.player);
+    }
+
+    shootBullet() {
+        // Capture player dimensions
+        const player = document.getElementById("player");
+        const playerStyle = window.getComputedStyle(player);
+        const playerLeft = parseInt(playerStyle.left);
+        const playerBottom = parseInt(playerStyle.bottom);
+    
+        // Create bullet and calculate proper placement
+        const bullet = document.createElement("div");
+        bullet.className = "bullet";
+        bullet.style.left = (playerLeft + this.player.clientWidth / 2) + "px";
+        bullet.style.bottom = (playerBottom + 20) + "px";
+    
+        globalContainer.appendChild(bullet);
     }
 }
 
@@ -21,24 +42,54 @@ class Enemy {
         this.enemy.src = "../assets/space-invaders/alien.png";
         this.container.appendChild(this.enemy);
     }
-}
 
-function shootBullet() {
-    // Capture player dimensions
-    const player = document.getElementById("player");
-    const playerStyle = window.getComputedStyle(player);
-    const playerLeft = parseInt(playerStyle.left);
-    const playerBottom = parseInt(playerStyle.bottom);
+    enemyShootBullet(){
+        const enemyStyle = window.getComputedStyle(this.enemy); // Get the style of the current enemy
+        const bullet = document.createElement("div");
+        bullet.className = "enemy-bullet";
 
-    // Create bullet and calculate proper placement
-    const bullet = document.createElement("div");
-    bullet.className = "bullet";
-    bullet.style.left = (playerLeft + player.clientWidth / 2) + "px";
-    bullet.style.bottom = (playerBottom + 20) + "px";
-
-    globalContainer.appendChild(bullet);
+        bullet.style.left = enemyStyle.left;
+        bullet.style.top = (parseInt(enemyStyle.top) + this.enemy.clientHeight) + "px";
+        globalContainer.appendChild(bullet);
     
+        const bulletInterval = setInterval(() => {
+            const currentTop = parseInt(bullet.style.top);
+            bullet.style.top = (currentTop + bulletSpeed) + "px";
+    
+            if (currentTop > globalContainer.clientHeight) {
+                clearInterval(bulletInterval);
+                globalContainer.removeChild(bullet);
+            }
+        }, 30);
+    }
 }
+
+let currentDirection = 'right';
+let currentLeft = 0;
+
+function moveEnemies() {
+    const enemyContainer = document.getElementById("enemyContainer");
+    const globalWidth = globalContainer.clientWidth;
+    const enemyWidth = enemyContainer.clientWidth;
+
+    if (currentDirection === 'right') {
+        currentLeft += stepSize;
+        if (currentLeft + enemyWidth >= globalWidth) {
+            currentDirection = 'left';
+            currentLeft = globalWidth - enemyWidth;
+            enemyContainer.style.top = (parseInt(enemyContainer.style.top || 0) + dropSize) + "px";
+        }
+    } else {
+        currentLeft -= stepSize;
+        if (currentLeft <= 0) {
+            currentDirection = 'right';
+            currentLeft = 0;
+            enemyContainer.style.top = (parseInt(enemyContainer.style.top || 0) + dropSize) + "px";
+        }
+    }
+    enemyContainer.style.left = currentLeft + "px";
+}
+setInterval(moveEnemies, enemyMoveInterval);
 
 
 function spawnEnemies(numEnemies, numEnemiesPerRow){
@@ -47,6 +98,7 @@ function spawnEnemies(numEnemies, numEnemiesPerRow){
 
     for(let i = 0; i < numEnemiesPerRow; i++){
         const enemyRow = document.createElement("div");
+        enemyRow.id = "enemyRow";
         for(let j = 0; j < numEnemies; j++){
             const enemyObj = new Enemy(enemyRow);
         }
@@ -65,16 +117,14 @@ function initializeScore(){
 
 function startGame(){
     const startScreen = document.getElementById("game-block");
-    startScreen.classList.add("disappear");
-    
     const container = document.querySelector('.game-sandbox');
+    startScreen.classList.add("disappear");
     const player = new Player(container);
+    let moveLeft = false;
+    let moveRight = false;
 
     initializeScore();
     spawnEnemies(9, 3);
-
-    let moveLeft = false;
-    let moveRight = false;
     
     // Event Listeners added to keep track of player actions (Left, Right, and Space)
     document.addEventListener('keydown', (event) => {
@@ -83,7 +133,7 @@ function startGame(){
         if(event.key === 'ArrowRight')
             moveRight = true;
         if(event.key === " ")
-            shootBullet();
+            player.shootBullet();
     });
     document.addEventListener('keyup', (event) => {
         if(event.key === 'ArrowLeft')
@@ -106,7 +156,6 @@ function startGame(){
         if (moveRight && (left + player.clientWidth < globalContainer.clientWidth)) 
             player.style.left = (left + playerSpeed) + "px";
         
-        
         bullets.forEach((bullet) => {
             const bottom = parseInt(bullet.style.bottom);
             bullet.style.bottom = (bottom + bulletSpeed) + "px";
@@ -124,9 +173,3 @@ function startGame(){
 function restartGame(){
 
 }
-
-
-
-
-
-
