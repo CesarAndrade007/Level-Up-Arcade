@@ -8,28 +8,20 @@
     }
 }
 
-@keyframes leftright {
-    0% {
-        transform: translateX(-200px);
-    }
-    100% {
-        transform: translateX(200px) rotate(180deg);
-    }
-}
-
 /* -------- START SCREEN -------- */  
 .game-sandbox {
     background-image: url(../assets/space-invaders/space.jpg);
     width: 600px;
     height: 60vh;
     text-align: center;
+    position: relative;
 }
 
 #gameTitle {
     color: rgb(4, 211, 56);
     font-size: 50px;
     text-shadow: 0 0 20px rgb(0, 220, 44);
-    animation: updown 1s ease-in-out infinite alternate;
+    animation: updown 2s ease-in-out infinite alternate;
 }
 
 #gameInstructions {
@@ -46,9 +38,11 @@
 
 #enemy-icon {
     border: none;
-    width: 100px;
+    width: 180px;
     height: auto;
-    animation: leftright 3s ease-in-out infinite alternate;
+    margin: 0;
+    padding: 0;
+    animation: updown 3s ease-in-out infinite alternate;
 }
 
 #keyboard-arrows-img, #spacebar-img {
@@ -63,7 +57,7 @@
     color: white;
     border: none;
     border-radius: 100px;
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 10px 40px;
     background-color: rgb(0, 126, 25);
     animation: updown 8s ease-in-out infinite alternate;
@@ -77,7 +71,6 @@
     display: none;
 }
 
-
 /* -------- GAMEPLAY SCREEN -------- */
 
 #scoreCount{
@@ -87,10 +80,31 @@
     text-align: left;
 }
 
-#enemy {
+.enemy {
+    border: none;
+    width: 50px;
+    height: auto;
+    padding: 5px;
+}
+
+#player {
     border: none;
     width: 60px;
     height: auto;
-    margin-right: 20px;
+    transform: rotate(180deg);
+    position: absolute;
+    left: 300;
+    bottom: 0;
+}
+
+.bullet {
+    width: 5px;
+    height: 15px;
+    background-color: red;
+    position: absolute;
+}
+
+#enemyContainer {
+    padding-top: 20px;
 }
 
