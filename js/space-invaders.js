@@ -171,5 +171,6 @@ function startGame(){
 }
 
 function restartGame(){
-
+    initializeScore();
+    spawnEnemies(9, 3);
 }

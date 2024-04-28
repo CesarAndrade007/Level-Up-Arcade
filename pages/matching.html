@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matching</title>
+    <title>Memory</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/memory.css">
 </head>
 <body>
     <header>
@@ -18,7 +19,7 @@
                     <ul class="subnav-content">
                         <li><a href="sudoku.html">Sudoku</a></li>
                         <li><a href="space-invaders.html">Space Invaders</a></li>
-                        <li><a href="matching.html">Matching</a></li>
+                        <li><a href="matching.html">Memory Game</a></li>
                         <li><a href="tic-tac-toe.html">Tic-Tac-Toe</a></li>
                     </ul>
                 </li>
@@ -28,8 +29,30 @@
     </header>
     <main>
         <section class="gameContainer">
-            <h1 class="game-heading">Matching</h1>
-            <div class="game-sandbox"></div>
+            <div class="game-sandbox">
+                <div id="start-screen">
+                    <h1 id="gameTitle">Memory</h1>
+                    <div id="cardContainer">
+                        <div class="card">
+                            <div class="card-inner flip-first">
+                                <div class="card-front"></div>
+                                <div class="card-back">
+                                    <img class="card-img" src="../assets/memory/circle-card.png" alt="card">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-inner flip-second">
+                                <div class="card-front"></div>
+                                <div class="card-back">
+                                    <img class="card-img" src="../assets/memory/circle-card.png" alt="card">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="startGame" onclick="startGame()">Start Game</button>
+                </div>
+            </div>
         </section>
     </main>
     <footer>
@@ -39,5 +62,6 @@
             Developed by: Cesar Lopez-Andrade
         </strong>
     </footer>
+    <script src="../js/memory.js"></script>
 </body>
 </html>
