@@ -2,11 +2,16 @@
 
 // Global Variables for Game Settings
 const globalContainer = document.querySelector(".game-sandbox");
+
+// Player Global Settings
 const playerSpeed = 2;
-const bulletSpeed = 1;
+const bulletSpeed = 4;
+
+// Enemy Global Settings
 const stepSize = 10;
 const dropSize = 20;
-const enemyMoveInterval = 400;
+const enemyBulletSpeed = 10;
+const enemyMoveInterval = 500;
 
 class Player {
     constructor(container) {
@@ -43,25 +48,60 @@ class Enemy {
         this.container.appendChild(this.enemy);
     }
 
-    enemyShootBullet(){
-        const enemyStyle = window.getComputedStyle(this.enemy); // Get the style of the current enemy
+    shootBullet() {
         const bullet = document.createElement("div");
         bullet.className = "enemy-bullet";
 
-        bullet.style.left = enemyStyle.left;
-        bullet.style.top = (parseInt(enemyStyle.top) + this.enemy.clientHeight) + "px";
+        // Calculate bullet placement
+        bullet.style.left = (this.enemy.offsetLeft + this.enemy.offsetWidth / 2) + "px";
+        bullet.style.top = (this.enemy.offsetTop + this.enemy.offsetHeight) + "px";
         globalContainer.appendChild(bullet);
-    
+
+        // Controls bullet downward movement
         const bulletInterval = setInterval(() => {
             const currentTop = parseInt(bullet.style.top);
-            bullet.style.top = (currentTop + bulletSpeed) + "px";
-    
+            bullet.style.top = (currentTop + enemyBulletSpeed) + "px";
             if (currentTop > globalContainer.clientHeight) {
                 clearInterval(bulletInterval);
-                globalContainer.removeChild(bullet);
+                bullet.remove();
             }
-        }, 30);
+        }, 20);
     }
+
+    //
+    startShooting() {
+        const minDelay = 2000;
+        const maxDelay = 5000;
+
+        const shootInterval = () => {
+            this.shootBullet();
+            setTimeout(shootInterval, Math.random() * (maxDelay - minDelay) + minDelay);
+        };
+        setTimeout(shootInterval, Math.random() * (maxDelay - minDelay) + minDelay);
+    }
+}
+
+
+function checkCollisions() {
+    const bullets = document.querySelectorAll(".bullet");
+    const container = document.getElementById('enemyContainer');
+    const enemies = document.querySelectorAll(".enemy");
+
+    bullets.forEach(bullet => {
+        const bulletRect = bullet.getBoundingClientRect();
+
+        enemies.forEach(enemy => {
+            const enemyRect = enemy.getBoundingClientRect();
+
+            // Check if the bullet intersects with the enemy
+            if (bulletRect.left < enemyRect.right &&
+                bulletRect.right > enemyRect.left &&
+                bulletRect.top < enemyRect.bottom &&
+                bulletRect.bottom > enemyRect.top) {
+                // Collision detected, remove the enemy and the bullet
+            }
+        });
+    });
 }
 
 let currentDirection = 'right';
@@ -77,14 +117,12 @@ function moveEnemies() {
         if (currentLeft + enemyWidth >= globalWidth) {
             currentDirection = 'left';
             currentLeft = globalWidth - enemyWidth;
-            enemyContainer.style.top = (parseInt(enemyContainer.style.top || 0) + dropSize) + "px";
         }
     } else {
         currentLeft -= stepSize;
         if (currentLeft <= 0) {
             currentDirection = 'right';
             currentLeft = 0;
-            enemyContainer.style.top = (parseInt(enemyContainer.style.top || 0) + dropSize) + "px";
         }
     }
     enemyContainer.style.left = currentLeft + "px";
@@ -92,15 +130,16 @@ function moveEnemies() {
 setInterval(moveEnemies, enemyMoveInterval);
 
 
-function spawnEnemies(numEnemies, numEnemiesPerRow){
+function spawnEnemies(numEnemies, numEnemiesPerRow) {
     const enemyContainer = document.createElement("div");
     enemyContainer.id = "enemyContainer";
 
-    for(let i = 0; i < numEnemiesPerRow; i++){
+    for (let i = 0; i < numEnemiesPerRow; i++) {
         const enemyRow = document.createElement("div");
-        enemyRow.id = "enemyRow";
-        for(let j = 0; j < numEnemies; j++){
+        for (let j = 0; j < numEnemies; j++) {
             const enemyObj = new Enemy(enemyRow);
+            enemyRow.appendChild(enemyObj.enemy);
+            enemyObj.startShooting();
         }
         enemyContainer.appendChild(enemyRow);
     }
@@ -117,14 +156,13 @@ function initializeScore(){
 
 function startGame(){
     const startScreen = document.getElementById("game-block");
-    const container = document.querySelector('.game-sandbox');
     startScreen.classList.add("disappear");
-    const player = new Player(container);
+    const player = new Player(globalContainer);
     let moveLeft = false;
     let moveRight = false;
 
     initializeScore();
-    spawnEnemies(9, 3);
+    spawnEnemies(10, 3);
     
     // Event Listeners added to keep track of player actions (Left, Right, and Space)
     document.addEventListener('keydown', (event) => {
@@ -164,7 +202,8 @@ function startGame(){
                 bullet.remove();
             }
         });
-    
+
+        checkCollisions();
         requestAnimationFrame(movementControl);
     }
     movementControl();

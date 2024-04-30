@@ -97,9 +97,16 @@
     bottom: 0;
 }
 
-.bullet, .enemy-bullet {
+.bullet{
     width: 5px;
     height: 15px;
+    background-color: yellow;
+    position: absolute;
+}
+
+.enemy-bullet {
+    width: 5px;
+    height: 20px;
     background-color: red;
     position: absolute;
 }

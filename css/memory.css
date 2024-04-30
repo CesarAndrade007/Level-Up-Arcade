@@ -24,12 +24,27 @@
     }
 }
 
+@keyframes fadeOut {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-400px);
+        opacity: 0;
+    }
+}
+
 /* -------- START SCREEN -------- */
 .game-sandbox {
     background-image: url(../assets/memory/memory-background.jpg);
     width: 600px;
     height: 60vh;
     text-align: center;
+}
+
+#start-screen.fadeout {
+    animation: fadeOut 1s forwards;
 }
 
 #gameTitle {
