@@ -81,7 +81,7 @@
 
 /* -------- GAMEPLAY SCREEN -------- */
 #scoreCount{
-    font-size: 30px;
+    font-size: 45px;
     font-family: "Jersey 15", sans-serif;
     margin: auto 10px;
     color: white;
@@ -89,7 +89,7 @@
 }
 
 #timeCount {
-    font-size: 30px;
+    font-size: 45px;
     font-family: "Jersey 15", sans-serif;
     margin: auto 10px;
     color: white;
