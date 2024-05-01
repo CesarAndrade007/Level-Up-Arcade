@@ -14,7 +14,7 @@ const bulletSpeed = 2;
 // Enemy Global Settings
 const stepSize = 10;
 const dropSize = 20;
-const enemyBulletSpeed = 4;
+const enemyBulletSpeed = 8;
 const enemyMoveInterval = 1000;
 let currentDirection = 'right';
 let currentLeft = 0;
@@ -91,34 +91,6 @@ class Enemy {
     }
 }
 
-function clearScreen(){
-    while(globalContainer.firstChild)
-        globalContainer.firstChild.remove();
-}
-
-function gameOverScreen(){
-    const gameOverScreen = document.createElement("div");
-    const gameOver = document.createElement("h2");
-    gameOver.id = "game-over";
-    gameOver.innerHTML = "Game Over!";
-
-    const restartButton = document.createElement("button");
-    restartButton.id = "restartGame";
-    restartButton.innerHTML = "Restart Game";
-
-    clearScreen();
-
-    gameOverScreen.appendChild(gameOver);
-    gameOverScreen.appendChild(restartButton);
-    globalContainer.appendChild(gameOverScreen);
-    
-    restartButton.addEventListener("click", function(e){
-        gameOverScreen.remove();
-        startGame();
-    });
-
-}
-
 function checkPlayerCollisions() {
     const bullets = document.querySelectorAll(".enemy-bullet");
     const player = document.getElementById("player");
@@ -189,7 +161,6 @@ function moveEnemies() {
     }
     enemyContainer.style.left = currentLeft + "px";
 }
-setInterval(moveEnemies, enemyMoveInterval);
 
 function spawnEnemies(numEnemies, numEnemiesPerRow) {
     const enemyContainer = document.createElement("div");
@@ -205,6 +176,47 @@ function spawnEnemies(numEnemies, numEnemiesPerRow) {
         enemyContainer.appendChild(enemyRow);
     }
     globalContainer.appendChild(enemyContainer);
+}
+
+function clearScreen(){
+    while(globalContainer.firstChild)
+        globalContainer.firstChild.remove();
+}
+
+function winScreen(){
+    const winScreen = document.createElement("div");
+    const winTitle = document.createElement("h2");
+    winTitle.id = "win-title";
+    winTitle.innerHTML = "You Win!"
+
+    clearScreen();
+
+    winScreen.appendChild(winTitle);
+    globalContainer.appendChild(winScreen);
+}
+
+
+function gameOverScreen(){
+    const gameOverScreen = document.createElement("div");
+    const gameOver = document.createElement("h2");
+    gameOver.id = "game-over";
+    gameOver.innerHTML = "Game Over!";
+
+    const restartButton = document.createElement("button");
+    restartButton.id = "restartGame";
+    restartButton.innerHTML = "Restart Game";
+
+    clearScreen();
+
+    gameOverScreen.appendChild(gameOver);
+    gameOverScreen.appendChild(restartButton);
+    globalContainer.appendChild(gameOverScreen);
+    
+    restartButton.addEventListener("click", function(e){
+        gameOverScreen.remove();
+        startGame();
+    });
+
 }
 
 function startTime(){
@@ -252,12 +264,14 @@ function removeStartScreen(){
 function startGame(){
     globalContainer.appendChild(scoreAndTimeContainer);
     const player = new Player(globalContainer);
+
     let moveLeft = false;
     let moveRight = false;
+    let canShoot = true;
 
     startTime();
     initializeScore();
-    spawnEnemies(10, 3);
+    spawnEnemies(10, 4);
     
     // Event Listeners added to keep track of player actions (Left, Right, and Space)
     document.addEventListener('keydown', (event) => {
@@ -265,8 +279,13 @@ function startGame(){
             moveLeft = true;
         if(event.key === 'ArrowRight')
             moveRight = true;
-        if(event.key === " ")
+        if(event.key === " " && canShoot){
             player.shootBullet();
+            canShoot = false;
+            setTimeout(()=>{
+                canShoot = true;
+            },1000);
+        }
     });
     document.addEventListener('keyup', (event) => {
         if(event.key === 'ArrowLeft')
@@ -304,3 +323,4 @@ function startGame(){
 
     movementControl();
 }
+setInterval(moveEnemies, enemyMoveInterval);

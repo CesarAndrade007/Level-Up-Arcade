@@ -9,8 +9,7 @@ html {
 
 body {
   font-family: "Pixelify Sans", sans-serif;
-  background-image: url(../images/background-image.jpg);
-  background-repeat: no-repeat;
+  background-image: url(../images/background.webp);
   background-size: cover;
   background-position: center;
   margin-left: 10%;
@@ -34,20 +33,29 @@ img {
   }
 }
 
+@keyframes gameglow {
+  from {
+    box-shadow: 0 0 80px rgb(113, 0, 139);
+  }
+  to {
+    box-shadow: 0 0 100px rgb(255, 3, 247);
+  }
+}
+
 /* -------- NAVBAR -------- */
 #website-title {
   color: rgb(22, 216, 61);
   font-family: "Pixelify Sans", sans-serif;
   text-decoration: solid;
   margin-top: -5px;
-  font-size: 35px;
+  font-size: 45px;
   float: left;
   overflow: hidden;
   animation: glow 1s ease-in-out infinite alternate;
 }
 
 .desktop-nav {
-  background-color: #000000;
+  background-color: #000000a5;
   padding: 10px;
   overflow: hidden;
   position: fixed;
@@ -98,7 +106,7 @@ ul li {
 .subnav-button {
   font-family: "Pixelify Sans", sans-serif;
   font-size: 25px;
-  background-color: #000000;
+  background-color: #00000082;
   border: none;
   color: white;
   cursor: pointer;
@@ -149,13 +157,14 @@ ul li {
 }
 
 .game-sandbox {
-  width: 40%;
-  height: auto;
+  width: 50%;
+  height: 600px;
   margin: auto;
   border-radius: 10px;
   border: 2px solid black;
   align-items: center;
   overflow: hidden;
+  animation: gameglow 1s ease-in-out infinite alternate;
   background-color: rgb(50, 50, 50);
 }
 
@@ -167,8 +176,8 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60px;
-  background: #000000;
+  height: auto;
+  background: #000000ae;
   padding: 25px;
   z-index: 1000;
 }
