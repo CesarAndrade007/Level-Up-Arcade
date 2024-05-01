@@ -63,21 +63,39 @@
     animation: updown 8s ease-in-out infinite alternate;
 }
 
+#restartGame {
+    font-size: 20px;
+    font-family: inherit;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 10px 40px;
+    background-color: rgb(0, 126, 25);
+}
+
 #startGame:hover {
     background-color: rgb(0, 65, 13);
 }
 
-#game-block.disappear > * {
+#start-screen.disappear > * {
     display: none;
 }
 
 /* -------- GAMEPLAY SCREEN -------- */
-
 #scoreCount{
     font-size: 30px;
+    font-family: "Jersey 15", sans-serif;
     margin: auto 10px;
     color: white;
-    text-align: left;
+    float: left;
+}
+
+#timeCount {
+    font-size: 30px;
+    font-family: "Jersey 15", sans-serif;
+    margin: auto 10px;
+    color: white;
+    float: right;
 }
 
 .enemy {
@@ -113,6 +131,12 @@
 
 #enemyContainer {
     position: absolute;
-    padding-top: 20px;
+    align-items: center;
+    padding-top: 40px;
 }
 
+#game-over {
+    font-family: "Jersey 15", sans-serif;
+    color: red;
+    font-size: 90px;
+}

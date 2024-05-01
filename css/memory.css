@@ -1,7 +1,6 @@
 /* 
     Background Image: https://www.freepik.com/free-vector/gradient-white-monochrome-background_15185920.htm#query=sleek%20backgrounds&position=1&from_view=keyword&track=ais&uuid=1f592f97-79ad-4b3d-8c08-b98082aa40dd
 */
-
 /* -------- ANIMATIONS -------- */
 @keyframes flip {
     0% {
@@ -24,7 +23,7 @@
     }
 }
 
-@keyframes fadeOut {
+@keyframes fadeout {
     0% {
         transform: translateY(0);
         opacity: 1;
@@ -44,7 +43,7 @@
 }
 
 #start-screen.fadeout {
-    animation: fadeOut 1s forwards;
+    animation: fadeout 1s forwards;
 }
 
 #gameTitle {

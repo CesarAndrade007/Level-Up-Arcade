@@ -2,16 +2,22 @@
 
 // Global Variables for Game Settings
 const globalContainer = document.querySelector(".game-sandbox");
+const scoreAndTimeContainer = document.createElement("div");
+const scoreElement = document.createElement("h3");
+scoreElement.id = "scoreCount";
 
 // Player Global Settings
+let score = 0;
 const playerSpeed = 2;
-const bulletSpeed = 4;
+const bulletSpeed = 2;
 
 // Enemy Global Settings
 const stepSize = 10;
 const dropSize = 20;
-const enemyBulletSpeed = 10;
-const enemyMoveInterval = 500;
+const enemyBulletSpeed = 4;
+const enemyMoveInterval = 1000;
+let currentDirection = 'right';
+let currentLeft = 0;
 
 class Player {
     constructor(container) {
@@ -23,9 +29,8 @@ class Player {
     }
 
     shootBullet() {
-        // Capture player dimensions
-        const player = document.getElementById("player");
-        const playerStyle = window.getComputedStyle(player);
+        const shootSound = new Audio('../assets/space-invaders/player-shoot.mp3');
+        const playerStyle = window.getComputedStyle(this.player);
         const playerLeft = parseInt(playerStyle.left);
         const playerBottom = parseInt(playerStyle.bottom);
     
@@ -36,6 +41,7 @@ class Player {
         bullet.style.bottom = (playerBottom + 20) + "px";
     
         globalContainer.appendChild(bullet);
+        shootSound.play();
     }
 }
 
@@ -65,47 +71,103 @@ class Enemy {
                 clearInterval(bulletInterval);
                 bullet.remove();
             }
-        }, 20);
+        }, 40);
     }
 
-    //
-    startShooting() {
-        const minDelay = 2000;
-        const maxDelay = 5000;
-
+    startShooting(minDelay, maxDelay) {
         const shootInterval = () => {
-            this.shootBullet();
-            setTimeout(shootInterval, Math.random() * (maxDelay - minDelay) + minDelay);
+            if (document.querySelectorAll('.enemy').length > 0) {
+                this.shootBullet();
+                setTimeout(shootInterval, Math.random() * (maxDelay - minDelay) + minDelay);
+            } else {
+                this.stopShooting();
+            }
         };
-        setTimeout(shootInterval, Math.random() * (maxDelay - minDelay) + minDelay);
+        this.shootingInterval = setTimeout(shootInterval, Math.random() * (maxDelay - minDelay) + minDelay);
+    }
+
+    stopShooting() {
+        clearTimeout(0);
     }
 }
 
+function clearScreen(){
+    while(globalContainer.firstChild)
+        globalContainer.firstChild.remove();
+}
 
-function checkCollisions() {
-    const bullets = document.querySelectorAll(".bullet");
-    const container = document.getElementById('enemyContainer');
-    const enemies = document.querySelectorAll(".enemy");
+function gameOverScreen(){
+    const gameOverScreen = document.createElement("div");
+    const gameOver = document.createElement("h2");
+    gameOver.id = "game-over";
+    gameOver.innerHTML = "Game Over!";
+
+    const restartButton = document.createElement("button");
+    restartButton.id = "restartGame";
+    restartButton.innerHTML = "Restart Game";
+
+    clearScreen();
+
+    gameOverScreen.appendChild(gameOver);
+    gameOverScreen.appendChild(restartButton);
+    globalContainer.appendChild(gameOverScreen);
+    
+    restartButton.addEventListener("click", function(e){
+        gameOverScreen.remove();
+        startGame();
+    });
+
+}
+
+function checkPlayerCollisions() {
+    const bullets = document.querySelectorAll(".enemy-bullet");
+    const player = document.getElementById("player");
+    const playerRect = player.getBoundingClientRect();
 
     bullets.forEach(bullet => {
         const bulletRect = bullet.getBoundingClientRect();
 
+        if (bulletRect.left < playerRect.right &&
+            bulletRect.right > playerRect.left &&
+            bulletRect.top < playerRect.bottom &&
+            bulletRect.bottom > playerRect.top) {
+            if (player.parentNode) {
+                player.parentNode.removeChild(player);
+                gameOverScreen();
+            }
+        }
+    });
+}
+
+function checkEnemyCollisions() {
+    const bullets = document.querySelectorAll(".bullet");
+    const enemies = document.querySelectorAll(".enemy");
+
+    bullets.forEach(bullet => {
+        const bulletRect = bullet.getBoundingClientRect();
+        let bulletRemoved = false;
+
         enemies.forEach(enemy => {
+            if (bulletRemoved) return;
             const enemyRect = enemy.getBoundingClientRect();
 
-            // Check if the bullet intersects with the enemy
             if (bulletRect.left < enemyRect.right &&
                 bulletRect.right > enemyRect.left &&
                 bulletRect.top < enemyRect.bottom &&
                 bulletRect.bottom > enemyRect.top) {
-                // Collision detected, remove the enemy and the bullet
+
+                if (enemy.parentNode) {
+                    enemy.parentNode.removeChild(enemy);
+                    updateScore();
+                }
+                if (bullet.parentNode) {
+                    bullet.parentNode.removeChild(bullet);
+                }
+                bulletRemoved = true;
             }
         });
     });
 }
-
-let currentDirection = 'right';
-let currentLeft = 0;
 
 function moveEnemies() {
     const enemyContainer = document.getElementById("enemyContainer");
@@ -129,7 +191,6 @@ function moveEnemies() {
 }
 setInterval(moveEnemies, enemyMoveInterval);
 
-
 function spawnEnemies(numEnemies, numEnemiesPerRow) {
     const enemyContainer = document.createElement("div");
     enemyContainer.id = "enemyContainer";
@@ -139,28 +200,62 @@ function spawnEnemies(numEnemies, numEnemiesPerRow) {
         for (let j = 0; j < numEnemies; j++) {
             const enemyObj = new Enemy(enemyRow);
             enemyRow.appendChild(enemyObj.enemy);
-            enemyObj.startShooting();
+            enemyObj.startShooting(2000,15000);
         }
         enemyContainer.appendChild(enemyRow);
     }
     globalContainer.appendChild(enemyContainer);
 }
 
+function startTime(){
+    let time = 0;
+    const timeElement = document.createElement("h3");
+    timeElement.id = "timeCount";
+    timeElement.textContent = "Time: 00:00"
+    
+    let intervalClear = setInterval(() => {
+        if(document.querySelectorAll('.enemy').length === 0){
+            clearInterval(intervalClear);
+            timeElement.remove();
+            return;
+        }
+        
+        time++;
+        let minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+        timeElement.textContent = "Time: " + minutes + ":" + seconds;
+        
+    }, 1000);
+    scoreAndTimeContainer.appendChild(timeElement);
+}
+
 function initializeScore(){
-    let score = 0;
-    const scoreElement = document.createElement("h3");
-    scoreElement.id = "scoreCount";
+    score = 0;
     scoreElement.textContent = "Score: " + score;
-    globalContainer.appendChild(scoreElement);
+    scoreAndTimeContainer.appendChild(scoreElement);
+}
+
+function updateScore(){
+    score += 10;
+    const scoreElement = document.getElementById("scoreCount");
+    scoreElement.textContent = "Score: " + score;
+}
+
+function removeStartScreen(){
+    const startScreen = document.getElementById("start-screen");
+    startScreen.classList.add("disappear");
+    startGame();
 }
 
 function startGame(){
-    const startScreen = document.getElementById("game-block");
-    startScreen.classList.add("disappear");
+    globalContainer.appendChild(scoreAndTimeContainer);
     const player = new Player(globalContainer);
     let moveLeft = false;
     let moveRight = false;
 
+    startTime();
     initializeScore();
     spawnEnemies(10, 3);
     
@@ -179,7 +274,7 @@ function startGame(){
         if(event.key === 'ArrowRight')
             moveRight = false;
     });
-    
+
     // Perform actions based on player keybinds
     function movementControl() {
         const player = document.getElementById("player");
@@ -202,14 +297,10 @@ function startGame(){
                 bullet.remove();
             }
         });
-
-        checkCollisions();
+        checkPlayerCollisions();
+        checkEnemyCollisions();
         requestAnimationFrame(movementControl);
     }
-    movementControl();
-}
 
-function restartGame(){
-    initializeScore();
-    spawnEnemies(9, 3);
+    movementControl();
 }

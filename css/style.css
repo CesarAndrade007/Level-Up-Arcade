@@ -150,7 +150,7 @@ ul li {
 
 .game-sandbox {
   width: 40%;
-  height: 55vh;
+  height: auto;
   margin: auto;
   border-radius: 10px;
   border: 2px solid black;
