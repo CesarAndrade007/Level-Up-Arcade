@@ -8,7 +8,7 @@ scoreElement.id = "scoreCount";
 
 // Player Global Settings
 let score = 0;
-const playerSpeed = 2;
+const playerSpeed = 4;
 const bulletSpeed = 2;
 
 // Enemy Global Settings
@@ -17,7 +17,7 @@ const dropSize = 20;
 const enemyBulletSpeed = 8;
 const enemyMoveInterval = 1000;
 let currentDirection = 'right';
-let currentLeft = 0;
+let currentLeft = 100;
 
 class Player {
     constructor(container) {
@@ -54,6 +54,18 @@ class Enemy {
         this.container.appendChild(this.enemy);
     }
 
+    startShooting(minDelay, maxDelay) {
+        const shootInterval = () => {
+            if (document.querySelectorAll('.enemy').length > 0) {
+                this.shootBullet();
+                setTimeout(shootInterval, Math.random() * (maxDelay - minDelay) + minDelay);
+            } else {
+                this.stopShooting();
+            }
+        };
+        this.shootingInterval = setTimeout(shootInterval, Math.random() * (maxDelay - minDelay) + minDelay);
+    }
+
     shootBullet() {
         const bullet = document.createElement("div");
         bullet.className = "enemy-bullet";
@@ -74,20 +86,9 @@ class Enemy {
         }, 40);
     }
 
-    startShooting(minDelay, maxDelay) {
-        const shootInterval = () => {
-            if (document.querySelectorAll('.enemy').length > 0) {
-                this.shootBullet();
-                setTimeout(shootInterval, Math.random() * (maxDelay - minDelay) + minDelay);
-            } else {
-                this.stopShooting();
-            }
-        };
-        this.shootingInterval = setTimeout(shootInterval, Math.random() * (maxDelay - minDelay) + minDelay);
-    }
 
     stopShooting() {
-        clearTimeout(0);
+        clearTimeout(this.shootingInterval);
     }
 }
 
@@ -176,6 +177,12 @@ function spawnEnemies(numEnemies, numEnemiesPerRow) {
         enemyContainer.appendChild(enemyRow);
     }
     globalContainer.appendChild(enemyContainer);
+
+    const globalWidth = globalContainer.clientWidth;
+    const enemyWidth = enemyContainer.clientWidth;
+    
+    currentLeft = (globalWidth - enemyWidth) / 2;
+    enemyContainer.style.left = currentLeft + "px";
 }
 
 function clearScreen(){
