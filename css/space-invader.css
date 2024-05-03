@@ -148,3 +148,110 @@
     color: green;
     font-size: 90px;
 }
+
+#control-container {
+    display: none;
+}
+
+/* -------- RESPONSIVE PORTION -------- */
+@media only screen and (max-width: 768px) {
+    #control-container{
+        display:flex;
+        position: absolute;
+        bottom: 10px;
+        left: 130px;
+        gap: 5px;
+    }
+    #right-arrow,
+    #left-arrow,
+    #space-bar {
+        background-color: rgba(128, 128, 128, 0.7);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+    }
+    #gameTitle {
+        margin-top: 40px;
+        font-size: 40px;
+    }
+    #gameInstructions {
+        margin-top: 40px;
+        font-size: 20px;
+    }
+    #shipMovement {
+        padding: 20px;
+    }
+    #enemy-icon {
+        width: 200px;
+    }
+    #keyboard-arrows-img, #spacebar-img {
+        border: none;
+        width: 100px;
+        height: auto;
+    }
+    #startGame {
+        font-size: 20px;
+        font-family: inherit;
+        color: white;
+        border: none;
+        border-radius: 100px;
+        margin-top: 40px;
+        padding: 10px 40px;
+    }
+    #start-screen.disappear > * {
+        display: none;
+    }
+    #scoreCount{
+        font-size: 30px;
+        font-family: "Jersey 15", sans-serif;
+        margin: auto 10px;
+        color: white;
+        float: left;
+    }
+    #timeCount {
+        font-size: 30px;
+        font-family: "Jersey 15", sans-serif;
+        margin: auto 10px;
+        color: white;
+        float: right;
+    }
+    .enemy {
+        border: none;
+        width: 35px;
+        height: auto;
+        padding: 2px;
+    }
+    
+    #player {
+        border: none;
+        width: 50px;
+        height: auto;
+        transform: rotate(180deg);
+        position: absolute;
+        left: 280;
+        bottom: 60px;
+    }
+    
+    .bullet{
+        width: 3px;
+        height: 8px;
+        background-color: yellow;
+        position: absolute;
+    }
+    
+    .enemy-bullet {
+        width: 5px;
+        height: 8px;
+        background-color: red;
+        position: absolute;
+    }
+    
+    #enemyContainer {
+        position: absolute;
+        padding-top: 40px;
+    }
+}

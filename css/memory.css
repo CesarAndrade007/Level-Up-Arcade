@@ -250,3 +250,250 @@
     padding: 10px 40px;
     background-color: rgb(0, 126, 25);
 }
+
+#play-again:hover {
+    background-color: rgb(1, 169, 35);
+}
+
+
+@media only screen and (max-width: 768px) {
+    
+    #gameTitle {
+        margin-top: 40px;
+        margin-bottom: 30px;
+        font-family: "Jersey 15", sans-serif;
+        color: rgb(1, 69, 136);
+        font-size: 70px;
+        text-shadow: 0px 10px 0px rgb(255, 255, 255);
+        animation: updown 2s ease-in-out infinite alternate;
+    }
+    
+    #cardContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .card-img {
+        border: none;
+        width: 100px;
+        height: auto;
+        margin: 50px auto;
+    }
+    
+    .card {
+        display: block;
+        width: 130px;
+        height: 180px;
+        border-radius: 10px;
+        perspective: 1000px;
+    }
+    .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: none;
+        transform-style: preserve-3d;    
+    }
+    .card-inner.flip-first {
+        animation: flip 4s infinite;
+    }
+    .card-inner.flip-second {
+        animation: flip 3s infinite;
+    }
+    .card-front, .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+    }
+    .card-front {
+        background-color: #dedcdc;
+        border-radius: 10px;
+        border: 1px solid black;
+    }
+    .card-back {
+        border-radius: 10px;
+        background-color: white;
+        border: 1px solid black;
+        color: white;
+        transform: rotateY(180deg);
+    }
+    
+    #startGame {
+        font-size: 20px;
+        font-family: inherit;
+        color: white;
+        border: none;
+        border-radius: 100px;
+        margin-top: 60px;
+        padding: 10px 40px;
+        background-color: rgb(0, 126, 25);
+    }
+    
+    #startGame:hover {
+        background-color: rgb(0, 65, 13);
+    }
+    
+    /* -------- GAMEPLAY SCREEN -------- */
+    #card-grid {
+        display: grid;
+        padding: 120px;
+        margin-top: -40px;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 20px;
+        animation: slideup 1s forwards;
+    }
+    
+    .game-card {
+        display: block;
+        width: 130px;
+        height: 150px;
+        border-radius: 10px;
+        perspective: 1000px;
+    }
+    
+    .game-card-image{
+        width: 100px;
+        height: auto;
+        border-style: none;
+        margin-top: 20px;
+    }
+    
+    .game-card-inner.flip-over{
+        animation: flipcard 1s forwards;
+    }
+    
+    .game-card-inner.flip-back{
+        animation: flipback 1s forwards;
+    }
+    
+    .game-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: none;
+        transform-style: preserve-3d;    
+    }
+    
+    .game-card-front, .game-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+    }
+    
+    .game-card-front {
+        background-color: #dedcdc;
+        border-radius: 10px;
+        border: 1px solid black;
+    }
+    
+    .game-card-back {
+        border-radius: 10px;
+        background-color: white;
+        border: 1px solid black;
+        color: white;
+        transform: rotateY(180deg);
+    }
+    
+    
+    #match-title {
+        position: relative;
+        margin-top: -40px;
+        color: green;
+        font-family: "Jersey 15", sans-serif;
+        font-size: 30px;
+    }
+    
+    #nomatch-title {
+        position: relative;
+        margin-top: -40px;
+        color: rgb(166, 0, 0);
+        font-family: "Jersey 15", sans-serif;
+        font-size: 30px;
+    }
+    
+    #play-again{
+        font-size: 30px;
+        font-family: "Jersey 15", sans-serif;
+        color: white;
+        border: none;
+        border-radius: 100px;
+        margin-top: -10px;
+        padding: 10px 50px;
+        background-color: rgb(0, 126, 25);
+    }
+    
+    #play-again:hover {
+        background-color: rgb(1, 169, 35);
+    }
+}
+
+@media only screen and (max-width: 425px){
+    #card-grid {
+        display: grid;
+        padding: 60px;
+        margin-top: -40px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 20px;
+        animation: slideup 1s forwards;
+    }
+    .game-card {
+        display: block;
+        width: 130px;
+        height: 150px;
+        border-radius: 10px;
+        perspective: 1000px;
+    }
+    .game-card-image{
+        width: 100px;
+        height: auto;
+        border-style: none;
+        margin-top: 20px;
+    }
+    
+    .game-card-back {
+        border-radius: 10px;
+        background-color: white;
+        border: 1px solid black;
+        color: white;
+        transform: rotateY(180deg);
+    }
+    
+    #match-title {
+        position: relative;
+        margin-top: -40px;
+        color: green;
+        font-family: "Jersey 15", sans-serif;
+        font-size: 30px;
+    }
+    
+    #nomatch-title {
+        position: relative;
+        margin-top: -40px;
+        color: rgb(166, 0, 0);
+        font-family: "Jersey 15", sans-serif;
+        font-size: 30px;
+    }
+    
+    #play-again{
+        font-size: 30px;
+        font-family: "Jersey 15", sans-serif;
+        color: white;
+        border: none;
+        border-radius: 100px;
+        margin-top: -10px;
+        padding: 10px 50px;
+        background-color: rgb(0, 126, 25);
+    }
+    
+    #play-again:hover {
+        background-color: rgb(1, 169, 35);
+    }
+}

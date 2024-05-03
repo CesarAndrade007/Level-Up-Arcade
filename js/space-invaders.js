@@ -14,7 +14,7 @@ const bulletSpeed = 6;
 // Enemy Global Settings
 const stepSize = 10;
 const dropSize = 20;
-const enemyBulletSpeed = 8;
+const enemyBulletSpeed = 6;
 const enemyMoveInterval = 1000;
 let currentDirection = 'right';
 let currentLeft = 100;
@@ -29,6 +29,7 @@ class Player {
         this.canShoot = true;
     }
 
+    // The following method is responsible for the player's shooting capabilities
     shootBullet() {
         if(!this.canShoot) return;
 
@@ -62,6 +63,7 @@ class Enemy {
         this.container.appendChild(this.enemy);
     }
 
+    // The following method is responsible for the enemy's shooting frequency
     startShooting(minDelay, maxDelay) {
         const shootInterval = () => {
             if (document.querySelectorAll('.enemy').length > 0) {
@@ -74,6 +76,7 @@ class Enemy {
         this.shootingInterval = setTimeout(shootInterval, Math.random() * (maxDelay - minDelay) + minDelay);
     }
 
+    // The following method is responsible for creating the bullet and calculating proper placement
     shootBullet() {
         const bullet = document.createElement("div");
         bullet.className = "enemy-bullet";
@@ -94,11 +97,15 @@ class Enemy {
         }, 40);
     }
 
+    // Clear Intervals
     stopShooting() {
         clearTimeout(this.shootingInterval);
     }
 }
 
+
+// The following function checks for player collision with enemy bullets.
+// Upon getting hit, the game over screen will appear for the user.
 function checkPlayerCollisions() {
     const bullets = document.querySelectorAll(".enemy-bullet");
     const player = document.getElementById("player");
@@ -119,6 +126,9 @@ function checkPlayerCollisions() {
     });
 }
 
+// The following function checks for enemy collision with player bullets.
+// The function also checks if all enemies currently exist in the game, if
+// not, then the win screen will appear.
 function checkEnemyCollisions() {
     const bullets = document.querySelectorAll(".bullet");
     const enemies = document.querySelectorAll(".enemy");
@@ -155,6 +165,9 @@ function checkEnemyCollisions() {
     });
 }
 
+
+// The following function is responsible for enemy movement on the screen.
+// The function was designed to have the enemies move from right to left.
 function moveEnemies() {
     const enemyContainer = document.getElementById("enemyContainer");
     const globalWidth = globalContainer.clientWidth;
@@ -176,6 +189,9 @@ function moveEnemies() {
     enemyContainer.style.left = currentLeft + "px";
 }
 
+
+// The following function generates enemies onto the screen upon
+// the user pressing the Start Game button.
 function spawnEnemies(numEnemies, numEnemiesPerRow) {
     const enemyContainer = document.createElement("div");
     enemyContainer.id = "enemyContainer";
@@ -291,13 +307,40 @@ function removeStartScreen(){
     startGame();
 }
 
+
+function loadMobileControls(moveFlags, player){
+    const controlContainer = document.createElement("div");
+    const rightArrow = document.createElement("button");
+    const leftArrow = document.createElement("button");
+    const spaceBar = document.createElement("button");
+
+    controlContainer.id = "control-container";
+    rightArrow.id = "right-arrow";
+    leftArrow.id = "left-arrow";
+    spaceBar.id = "space-bar";
+
+    rightArrow.innerHTML = ">>";
+    leftArrow.innerHTML = "<<";
+    spaceBar.innerHTML = "Space";
+
+    controlContainer.appendChild(leftArrow);
+    controlContainer.appendChild(spaceBar);
+    controlContainer.appendChild(rightArrow);
+    globalContainer.appendChild(controlContainer);
+
+    leftArrow.addEventListener("touchstart", () => moveFlags.moveLeft = true);
+    leftArrow.addEventListener("touchend", () => moveFlags.moveLeft = false);
+    rightArrow.addEventListener("touchstart", () => moveFlags.moveRight = true);
+    rightArrow.addEventListener("touchend", () => moveFlags.moveRight = false);
+    spaceBar.addEventListener("touchstart", () => player.shootBullet());
+}
+
 function startGame(){
     globalContainer.appendChild(scoreAndTimeContainer);
     const player = new Player(globalContainer);
-
-    let moveLeft = false;
-    let moveRight = false;
-
+    const moveFlags = {moveLeft: false, moveRight: false};
+    
+    loadMobileControls(moveFlags,player);
     startTime();
     initializeScore();
     spawnEnemies(10, 4);
@@ -305,18 +348,18 @@ function startGame(){
     // Event Listeners added to keep track of player actions (Left, Right, and Space)
     document.addEventListener('keydown', (event) => {
         if(event.key === 'ArrowLeft')
-            moveLeft = true;
+            moveFlags.moveLeft = true;
         if(event.key === 'ArrowRight')
-            moveRight = true;
+            moveFlags.moveRight = true;
         if(event.key === " "){
             player.shootBullet();
         }
     });
     document.addEventListener('keyup', (event) => {
         if(event.key === 'ArrowLeft')
-            moveLeft = false;
+            moveFlags.moveLeft = false;
         if(event.key === 'ArrowRight')
-            moveRight = false;
+            moveFlags.moveRight = false;
     });
 
     // Perform actions based on player keybinds
@@ -327,10 +370,10 @@ function startGame(){
         const style = window.getComputedStyle(player);
         const left = parseInt(style.left);
         
-        if (moveLeft && left > 0) 
+        if (moveFlags.moveLeft && left > 0) 
             player.style.left = (left - playerSpeed) + "px";
         
-        if (moveRight && (left + player.clientWidth < globalContainer.clientWidth)) 
+        if (moveFlags.moveRight && (left + player.clientWidth < globalContainer.clientWidth)) 
             player.style.left = (left + playerSpeed) + "px";
         
         bullets.forEach((bullet) => {
