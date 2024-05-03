@@ -14,11 +14,13 @@
     The cardState is updated everytime the user presses the restart
     game button. If the player successfully chooses cards that are of
     the same identifier, then we count it as a match.
-*******************************************************************/
+********************************************************************/
 
 const globalContainer = document.querySelector(".game-sandbox");
 let cardState = ["", "", "", "", "", ""];
+let state = [1,2,3];
 let templateState = [1, 1, 2, 2, 3, 3];
+let flippedCards = [];
 
 function shuffleElements(templateState){
     for(let i = templateState.length -1; i > 0; i--){
@@ -34,63 +36,85 @@ function loadCardState(){
     }
 }
 
-function createCardImage(card, imageUrl) {
+function createCardImage(card, imageUrl, id) {
     let cardBack = card.querySelector(".game-card-back");
-
     if (cardBack) {
         let cardImage = document.createElement("img");
         cardImage.src = `../assets/memory/${imageUrl}`;
         cardImage.className = "game-card-image";
+        cardImage.id = `${id}`;
         cardBack.appendChild(cardImage);
     }
 }
 
-function createCard(){
+function createCard(idx){
+    let id = 0;
     let card = document.createElement("div");
-    card.className = "game-card";
-
     let cardSides = document.createElement("div");
-    cardSides.className = "game-card-inner";
-    card.appendChild(cardSides);
-
     let cardFront = document.createElement("div");
-    cardFront.className = "game-card-front";
-    cardSides.appendChild(cardFront);
-
     let cardBack = document.createElement("div");
+
+    card.className = "game-card";
+    cardSides.className = "game-card-inner";
+    cardFront.className = "game-card-front";
     cardBack.className = "game-card-back";
+
+    card.appendChild(cardSides);
+    cardSides.appendChild(cardFront);
     cardSides.appendChild(cardBack);
 
+    switch(cardState[idx]) {
+        case 1:
+            createCardImage(card, 'triangle-card.png', state[0]);
+            id = state[0];
+            break;
+        case 2:
+            createCardImage(card, 'rectangle-card.png', state[1]);
+            id = state[1];
+            break;
+        case 3:
+            createCardImage(card, 'circle-card.png', state[2]);
+            id = state[2];
+            break;
+        default:
+            break;
+    }
+
+    cardSides.addEventListener("click", function() {
+        if (!cardSides.classList.contains("matched-card") && flippedCards.length < 2) {
+            cardSides.classList.toggle("flip-over");
+            matchCheck(id, cardSides);
+        }
+    });
     return card;
+}
+
+function matchCheck(id, element){
+    flippedCards.push({id, element});
+    if (flippedCards.length === 2) {
+        if (flippedCards[0].id === flippedCards[1].id) {
+            console.log("match!");
+            flippedCards[0].element.classList.add("matched-card");
+            flippedCards[1].element.classList.add("matched-card");
+            flippedCards = [];
+        } else {
+            setTimeout(function() {
+                flippedCards[0].element.classList.remove("flip-over");
+                flippedCards[1].element.classList.remove("flip-over");
+                flippedCards = [];
+            }, 1000);
+        }
+    }
 }
 
 function loadCardGrid(){
     const cardGrid = document.createElement("div");
     cardGrid.id = "card-grid";
-
     for(let i = 0; i < cardState.length; i++){
-        let card = createCard();
-        switch(cardState[i]) {
-            case 1:
-                createCardImage(card, 'triangle-card.png');
-                break;
-            case 2:
-                createCardImage(card, 'rectangle-card.png');
-                break;
-            case 3:
-                createCardImage(card, 'circle-card.png');
-                break;
-            default:
-                break;
-        }
+        let card = createCard(i);
         cardGrid.appendChild(card);
     }
     globalContainer.appendChild(cardGrid);
-}
-
-
-function matchCheck(){
-
 }
 
 function startGame(){
@@ -98,15 +122,12 @@ function startGame(){
     loadCardGrid();
 }
 
-
-
 function removeStartScreen(){
     const startScreen = document.getElementById('start-screen');
     startScreen.classList.add('fadeout');
-    
+
     setTimeout(function() {
         startScreen.style.display = 'none';
-    }, 2000);
-
-    startGame();
+        startGame();
+    }, 1000);
 }
