@@ -38,6 +38,8 @@
 .game-sandbox {
     background-image: url(../assets/memory/memory-background.jpg);
     text-align: center;
+    place-items: center;
+    position: relative;
 }
 
 #start-screen.fadeout {
@@ -129,4 +131,27 @@
 }
 
 /* -------- GAMEPLAY SCREEN -------- */
+
+#card-grid {
+    display: grid;
+    position: absolute;
+    padding: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.game-card-image{
+    width: 80px;
+    height: auto;
+    border-style: none;
+    margin-top: 20px;
+}
+
+.game-card {
+    width: 100px;
+    height: 120px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+}
 

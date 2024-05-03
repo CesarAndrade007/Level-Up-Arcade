@@ -26,9 +26,12 @@ class Player {
         this.player.id = "player";
         this.player.src = "../assets/space-invaders/enemy-game.png";
         this.container.appendChild(this.player);
+        this.canShoot = true;
     }
 
     shootBullet() {
+        if(!this.canShoot) return;
+
         const shootSound = new Audio('../assets/space-invaders/player-shoot.mp3');
         const playerStyle = window.getComputedStyle(this.player);
         const playerLeft = parseInt(playerStyle.left);
@@ -40,8 +43,13 @@ class Player {
         bullet.style.left = (playerLeft + this.player.clientWidth / 2) + "px";
         bullet.style.bottom = (playerBottom + 20) + "px";
     
-        globalContainer.appendChild(bullet);
+        this.container.appendChild(bullet);
         shootSound.play();
+
+        this.canShoot = false;
+        setTimeout(() => {
+            this.canShoot = true;
+        }, 1000);
     }
 }
 
@@ -199,6 +207,7 @@ function winScreen(){
     const winScreen = document.createElement("div");
     const winTitle = document.createElement("h2");
     const playAgain = document.createElement("button");
+
     winTitle.id = "win-title";
     winTitle.innerHTML = "You Win!";
     playAgain.id = "playAgain";
@@ -288,7 +297,6 @@ function startGame(){
 
     let moveLeft = false;
     let moveRight = false;
-    let canShoot = true;
 
     startTime();
     initializeScore();
@@ -300,12 +308,8 @@ function startGame(){
             moveLeft = true;
         if(event.key === 'ArrowRight')
             moveRight = true;
-        if(event.key === " " && canShoot){
+        if(event.key === " "){
             player.shootBullet();
-            canShoot = false;
-            setTimeout(()=>{
-                canShoot = true;
-            },1000);
         }
     });
     document.addEventListener('keyup', (event) => {
