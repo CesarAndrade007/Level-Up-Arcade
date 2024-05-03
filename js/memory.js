@@ -180,8 +180,6 @@ function startGame(){
     loadCardGrid();
 }
 
-
-
 function removeStartScreen(){
     const startScreen = document.getElementById('start-screen');
     startScreen.classList.add('fadeout');

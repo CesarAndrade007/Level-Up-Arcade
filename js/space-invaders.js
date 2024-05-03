@@ -219,6 +219,8 @@ function clearScreen(){
         globalContainer.firstChild.remove();
 }
 
+// Function that gets called when player kills all enemies
+// Displays "You Win!" followed by a button to play again.
 function winScreen(){
     const winScreen = document.createElement("div");
     const winTitle = document.createElement("h2");
@@ -241,7 +243,7 @@ function winScreen(){
     });
 }
 
-
+// Function that gets called when player dies
 function gameOverScreen(){
     const gameOverScreen = document.createElement("div");
     const gameOver = document.createElement("h2");
@@ -265,6 +267,7 @@ function gameOverScreen(){
 
 }
 
+// Function responsible for timer functionalities
 function startTime(){
     let time = 0;
     const timeElement = document.createElement("h3");
@@ -289,25 +292,28 @@ function startTime(){
     scoreAndTimeContainer.appendChild(timeElement);
 }
 
+// Initializes player's score
 function initializeScore(){
     score = 0;
     scoreElement.textContent = "Score: " + score;
     scoreAndTimeContainer.appendChild(scoreElement);
 }
 
+// This function is called whenever a player shoots and enemy.
 function updateScore(){
     score += 10;
     const scoreElement = document.getElementById("scoreCount");
     scoreElement.textContent = "Score: " + score;
 }
 
+// This function is called when the player dies or kills all enemies.
 function removeStartScreen(){
     const startScreen = document.getElementById("start-screen");
     startScreen.classList.add("disappear");
     startGame();
 }
 
-
+// Mobile controls loaded for screen sizes that are 768px and below.
 function loadMobileControls(moveFlags, player){
     const controlContainer = document.createElement("div");
     const rightArrow = document.createElement("button");
