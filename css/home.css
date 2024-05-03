@@ -10,6 +10,15 @@
   }
 }
 
+@keyframes gameglow {
+    from {
+      box-shadow: 0 0 10px rgb(70, 0, 83);
+    }
+    to {
+      box-shadow: 0 0 22px rgb(212, 0, 255);
+    }
+  }
+
 /* -------- HOME MAIN SECTION -------- */  
 .game-selection {
     padding-top: 120px;
@@ -22,11 +31,14 @@
     font-family: "Jersey 15", sans-serif;
     font-size: 40px;
     text-align: center;
-    background-color: rgb(0, 29, 135);
+    border: 8px solid black;
+    background-color: rgb(255, 251, 0);
+    text-shadow: 5px -5px 1px rgb(27, 230, 0);
     width: 250px;
     padding: 5px;
     border-radius: 5px;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    box-shadow: 0 -4px 30px rgb(255, 251, 126);
 }
 
 .game-description {
@@ -43,9 +55,9 @@
     padding: 5px 30px;
     border-top-right-radius: 40px;
     border-bottom-left-radius: 40px;
-    border: 3px solid rgb(0, 36, 74);
-    background-color: rgb(3, 139, 198);
-    box-shadow: 10px -2px 1px rgb(0, 92, 132);
+    border: 3px solid rgb(0, 0, 0);
+    background-color: rgb(22, 21, 21);
+    box-shadow: 20px -2px 1px rgb(0, 0, 0);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -59,16 +71,68 @@
     bottom: 0;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 0 90px rgb(51, 255, 0);
     transition: transform 0.3s ease-in-out;
-}
-
-.home-play-button:hover {
-    transform: translateY(-5px);
 }
 
 .card-container:hover {
     transform: scale(1.05);
 }
 
+/* -------- RESPONSIVE PORTION -------- */
+@media only screen and (max-width: 1024px) {
+
+    p{
+        padding: 50px;
+    }
+
+    .card-container{
+        padding: 5px;
+        box-shadow: none;
+    }
+
+    .game-selection {
+        padding-top: 120px;
+        padding-bottom: 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    }
+    
+    .game-title {
+        font-size: 90px;
+        border: 8px solid black;
+        width: 75%;
+        padding: 5px;
+    }
+    
+    .game-description {
+        color: white;
+        font-size: 40px;
+        margin-top: -20px;
+    }
+    
+    .card-container {
+        width: 100%;
+        padding: 5px 30px;
+    }
+    
+    .home-play-button {
+        margin-top: -20px;
+        width: 70%;
+        text-align: center;
+        padding: 30px 60px;
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+    
+    .home-play-button:hover {
+        transform: translateY(-5px);
+    }
+    
+    .card-container:hover {
+        transform: scale(1.05);
+    }
+}
 
 

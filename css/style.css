@@ -17,10 +17,11 @@ body {
   height: 100%;
 }
 
-img {
+.game-img {
   width: 270px;
   border: 5px solid rgb(15, 15, 15);
   border-radius: 20px;
+  box-shadow: 0 0 30px white;
 }
 
 /* -------- ANIMATIONS --------*/
@@ -39,6 +40,15 @@ img {
   }
   to {
     box-shadow: 0 0 100px rgb(255, 3, 247);
+  }
+}
+
+@keyframes screenglow {
+  from {
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+  }
+  to {
+    box-shadow: 0 0 22px rgb(255, 255, 255);
   }
 }
 
@@ -106,9 +116,10 @@ ul li {
 .subnav-button {
   font-family: "Pixelify Sans", sans-serif;
   font-size: 25px;
-  background-color: #00000082;
+  background-color: #00000000;
   border: none;
   color: white;
+  padding-right: 60px;
   cursor: pointer;
 }
 
@@ -137,11 +148,6 @@ ul li {
 
 .subnav-content:hover {
   display: flex;
-}
-
-/* -------- MOBILE MENU -------- */
-.mobile-nav {
-  display: none;
 }
 
 /* -------- GAME SANDBOX -------- */
@@ -185,4 +191,72 @@ footer {
 #copyright {
   color: white;
   font-size: 20px;
+}
+
+
+/* -------- RESPONSIVE PORTION -------- */
+
+@media only screen and (max-width: 1024px) {
+  body {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  img {
+    width: 600px;
+    height: auto;
+  }
+
+  #website-title {
+    margin-top: -5px;
+    font-size: 45px;
+  }
+  
+  .desktop-nav {
+    padding: 10px;
+  }
+  
+  .desktop-nav a {
+    padding: 5px 0;
+  }
+  
+  a,
+  a:visited,
+  a:active,
+  a:link {
+    font-size: 40px;
+  }
+  
+  ul {
+
+  }
+  
+  ul li {
+
+  }
+  
+  .subnav {
+
+  }
+  
+  .subnav-button {
+    font-size: 40px;
+    padding-right: 5px;
+  }
+  
+  .subnav-content {
+
+  }
+  
+  .subnav-content > li a {
+
+  }
+  
+  .subnav:hover .subnav-content {
+
+  }
+  
+  .subnav-content:hover {
+
+  }
 }
