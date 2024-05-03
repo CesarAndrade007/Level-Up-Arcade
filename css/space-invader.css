@@ -1,3 +1,13 @@
+/* 
+    Credits to OpenGameArt.org for providing the following images.
+    Enemies - https://opengameart.org/content/space-invaders-cartoon-icon
+    Player - https://opengameart.org/content/ship-recoloring-001-for-gm-game
+    Space Background - https://opengameart.org/content/space-background
+    Shooting Sound - Creator: Jesus Lastra (Couldnt find the URL)
+
+    Keyboard and Spacebar graphics were created by me
+*/
+
 /* -------- ANIMATIONS PORTION -------- */
 @keyframes updown {
     0%, 100% {

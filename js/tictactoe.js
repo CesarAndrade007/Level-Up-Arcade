@@ -1,3 +1,6 @@
+/*
+    Original Author: Daryl Posnett
+*/
 const cells = document.querySelectorAll('.cell');
 let currentPlayer = 'X'; // Player X is always the human
 let gameActive = true;
