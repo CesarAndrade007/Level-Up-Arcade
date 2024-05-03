@@ -9,7 +9,7 @@ scoreElement.id = "scoreCount";
 // Player Global Settings
 let score = 0;
 const playerSpeed = 4;
-const bulletSpeed = 2;
+const bulletSpeed = 6;
 
 // Enemy Global Settings
 const stepSize = 10;
@@ -86,7 +86,6 @@ class Enemy {
         }, 40);
     }
 
-
     stopShooting() {
         clearTimeout(this.shootingInterval);
     }
@@ -123,20 +122,26 @@ function checkEnemyCollisions() {
         enemies.forEach(enemy => {
             if (bulletRemoved) return;
             const enemyRect = enemy.getBoundingClientRect();
+            const enemyParent = enemy.parentNode;
 
             if (bulletRect.left < enemyRect.right &&
                 bulletRect.right > enemyRect.left &&
                 bulletRect.top < enemyRect.bottom &&
                 bulletRect.bottom > enemyRect.top) {
 
-                if (enemy.parentNode) {
-                    enemy.parentNode.removeChild(enemy);
-                    updateScore();
+                enemyParent.removeChild(enemy);
+                updateScore();
+
+                if (enemyParent.children.length === 0) {
+                    enemyParent.parentNode.removeChild(enemyParent);
                 }
-                if (bullet.parentNode) {
-                    bullet.parentNode.removeChild(bullet);
-                }
+
+                bullet.parentNode.removeChild(bullet);
                 bulletRemoved = true;
+
+                if (!document.querySelector(".enemy")) {
+                    winScreen();
+                }
             }
         });
     });
@@ -193,13 +198,22 @@ function clearScreen(){
 function winScreen(){
     const winScreen = document.createElement("div");
     const winTitle = document.createElement("h2");
+    const playAgain = document.createElement("button");
     winTitle.id = "win-title";
-    winTitle.innerHTML = "You Win!"
+    winTitle.innerHTML = "You Win!";
+    playAgain.id = "playAgain";
+    playAgain.innerHTML = "Play Again";
 
     clearScreen();
 
     winScreen.appendChild(winTitle);
+    winScreen.appendChild(playAgain);
     globalContainer.appendChild(winScreen);
+    
+    playAgain.addEventListener("click", function(e){
+        winScreen.remove();
+        startGame();
+    });
 }
 
 
@@ -238,7 +252,7 @@ function startTime(){
             timeElement.remove();
             return;
         }
-        
+
         time++;
         let minutes = Math.floor(time / 60);
         let seconds = time % 60;

@@ -51,7 +51,7 @@ h1.title {
 .score-container, .best-container {
   position: relative;
   display: inline-block;
-  background: #bbada0;
+  background: #0c8e00;
   padding: 15px 25px;
   font-size: 25px;
   height: 25px;
@@ -137,6 +137,8 @@ hr {
     opacity: 1; } }
 .game-container {
   margin: 60px auto;
+  
+  /* Modified by Cesar Lopez-Andrade */
   /* margin-top: 40px; */
   position: relative;
   padding: 15px;
@@ -148,7 +150,10 @@ hr {
   -ms-user-select: none;
   -ms-touch-action: none;
   touch-action: none;
-  background: #bbada0;
+
+  /* Modified by Cesar Lopez-Andrade */
+  background: #005b2c;
+
   border-radius: 6px;
   width: 500px;
   height: 500px;
@@ -312,6 +317,10 @@ hr {
   -ms-transform: translate(363px, 363px);
   transform: translate(363px, 363px); }
 
+/*
+  Modified by Cesar Lopez-Andrade
+  Modified color of tiles
+*/
 .tile {
   position: absolute;
   -webkit-transition: 100ms ease-in-out;
@@ -328,26 +337,26 @@ hr {
     z-index: 10;
     font-size: 55px; }
   .tile.tile-2 .tile-inner {
-    background: #eee4da;
+    background: #b9f6b0;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0); }
   .tile.tile-4 .tile-inner {
-    background: #ede0c8;
+    background: #91f170;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0); }
   .tile.tile-8 .tile-inner {
     color: #f9f6f2;
-    background: #f2b179; }
+    background: #36ff47; }
   .tile.tile-16 .tile-inner {
     color: #f9f6f2;
-    background: #f59563; }
+    background: #15e50b; }
   .tile.tile-32 .tile-inner {
     color: #f9f6f2;
-    background: #f67c5f; }
+    background: #00bd19; }
   .tile.tile-64 .tile-inner {
     color: #f9f6f2;
-    background: #f65e3b; }
+    background: #0f9301; }
   .tile.tile-128 .tile-inner {
     color: #f9f6f2;
-    background: #edcf72;
+    background: #006307;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.2381), inset 0 0 0 1px rgba(255, 255, 255, 0.14286);
     font-size: 45px; }
     @media screen and (max-width: 520px) {
