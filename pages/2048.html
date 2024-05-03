@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="../css/2048.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+    <header>
+        <nav class="desktop-nav">
+            <ul>
+                <li id="website-title">Level-Up Arcade <i class="fa fa-gamepad"></i></li>
+                <li><a href="home.html">Home</a></li>
+                <li class="subnav">
+                    <button class="subnav-button">Games <i class="fa fa-caret-down"></i></button>
+                    <ul class="subnav-content">
+                        <li><a href="2048.html">2048</a></li>
+                        <li><a href="space-invaders.html">Space Invaders</a></li>
+                        <li><a href="matching.html">Memory Game</a></li>
+                        <li><a href="tic-tac-toe.html">Tic-Tac-Toe</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- 
+        OPEN SOURCE GAME: 2048
+        CREDITS TO ORIGINAL OWNER: Gabriele Cirulli
+        Repository: https://github.com/gabrielecirulli/2048 
+    -->
+    <main>
+        <section class="gameContainer">
+            <div class="game-sandbox">
+                <div class="above-game">
+                    <a class="restart-button">New Game</a>
+                </div>
+                <div class="game-container">
+                  <div class="game-message">
+                    <div class="lower">
+                        <a class="keep-playing-button">Keep going</a>
+                      <a class="retry-button">Try again</a>
+                    </div>
+                  </div>
+            
+                  <div class="grid-container">
+                    <div class="grid-row">
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                    </div>
+                    <div class="grid-row">
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                    </div>
+                    <div class="grid-row">
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                    </div>
+                    <div class="grid-row">
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                      <div class="grid-cell"></div>
+                    </div>
+                  </div>
+                  <div class="tile-container">
+                  </div>
+                </div>
+              </div>
+        </section>
+    </main>
+    <footer>
+        <div id="copyright">
+            Ⓒ Level-Up Arcade - All Rights Reserved
+            <br>
+            Developed by: Cesar Lopez-Andrade
+        </div>
+    </footer>
+    <script src="../js/2048/bind_polyfill.js"></script>
+    <script src="../js/2048/classlist_polyfill.js"></script>
+    <script src="../js/2048/animframe_polyfill.js"></script>
+    <script src="../js/2048/keyboard_input_manager.js"></script>
+    <script src="../js/2048/html_actuator.js"></script>
+    <script src="../js/2048/grid.js"></script>
+    <script src="../js/2048/tile.js"></script>
+    <script src="../js/2048/local_storage_manager.js"></script>
+    <script src="../js/2048/game_manager.js"></script>
+    <script src="../js/2048/application.js"></script>
+</body>
+</html>
