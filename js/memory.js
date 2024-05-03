@@ -36,13 +36,40 @@ function loadCardState(){
     }
 }
 
-function createCardImage(card, imageUrl, id) {
+function displayMatch(){
+    const displayContainer = document.createElement("div");
+    const matchDisplay = document.createElement("h1");
+    matchDisplay.id = "match-title";
+    matchDisplay.innerHTML = "Match :D";
+
+    displayContainer.appendChild(matchDisplay);
+    globalContainer.appendChild(displayContainer);
+
+    setTimeout(() => {
+        globalContainer.removeChild(displayContainer);
+    }, 1000);
+}
+
+function displayNoMatch(){
+    const displayContainer = document.createElement("div");
+    const noMatchDisplay = document.createElement("h1");
+    noMatchDisplay.id = "nomatch-title";
+    noMatchDisplay.innerHTML = "No Match :("
+
+    displayContainer.appendChild(noMatchDisplay);
+    globalContainer.appendChild(displayContainer);
+
+    setTimeout(() => {
+        globalContainer.removeChild(displayContainer);
+    }, 1000);
+}
+
+function createCardImage(card, image) {
     let cardBack = card.querySelector(".game-card-back");
     if (cardBack) {
         let cardImage = document.createElement("img");
-        cardImage.src = `../assets/memory/${imageUrl}`;
+        cardImage.src = `../assets/memory/${image}`;
         cardImage.className = "game-card-image";
-        cardImage.id = `${id}`;
         cardBack.appendChild(cardImage);
     }
 }
@@ -90,14 +117,16 @@ function createCard(idx){
 }
 
 function matchCheck(id, element){
+    let allMatched = false;
     flippedCards.push({id, element});
     if (flippedCards.length === 2) {
         if (flippedCards[0].id === flippedCards[1].id) {
-            console.log("match!");
+            displayMatch();
             flippedCards[0].element.classList.add("matched-card");
             flippedCards[1].element.classList.add("matched-card");
             flippedCards = [];
         } else {
+            displayNoMatch();
             setTimeout(function() {
                 flippedCards[0].element.classList.remove("flip-over");
                 flippedCards[1].element.classList.remove("flip-over");
@@ -105,6 +134,18 @@ function matchCheck(id, element){
             }, 1000);
         }
     }
+    allMatched = checkAllMatchedCards();
+    if(allMatched)
+        playAgain();
+}
+
+function checkAllMatchedCards(){
+    const cards = document.querySelectorAll(".game-card-inner");
+    for(let card of cards){
+        if(!card.classList.contains("matched-card"))
+            return false;
+    }
+    return true;
 }
 
 function loadCardGrid(){
@@ -117,10 +158,29 @@ function loadCardGrid(){
     globalContainer.appendChild(cardGrid);
 }
 
+function clearScreen(){
+    while(globalContainer.firstChild)
+        globalContainer.firstChild.remove();
+}
+
+
+function playAgain(){
+    const playAgain = document.createElement("button");
+    playAgain.id = "play-again";
+    playAgain.innerHTML = "Play Again!";
+    globalContainer.appendChild(playAgain);
+    playAgain.addEventListener("click", function() {
+        clearScreen();
+        startGame();
+    });
+}
+
 function startGame(){
     loadCardState();
     loadCardGrid();
 }
+
+
 
 function removeStartScreen(){
     const startScreen = document.getElementById('start-screen');

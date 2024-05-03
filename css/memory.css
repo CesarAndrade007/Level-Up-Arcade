@@ -160,10 +160,9 @@
 }
 
 /* -------- GAMEPLAY SCREEN -------- */
-
 #card-grid {
     display: grid;
-    padding: 140px;
+    padding: 100px;
     margin-top: -40px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -224,3 +223,30 @@
     transform: rotateY(180deg);
 }
 
+
+#match-title {
+    position: relative;
+    margin-top: -40px;
+    color: green;
+    font-family: "Jersey 15", sans-serif;
+    font-size: 80px;
+}
+
+#nomatch-title {
+    position: relative;
+    margin-top: -40px;
+    color: rgb(166, 0, 0);
+    font-family: "Jersey 15", sans-serif;
+    font-size: 80px;
+}
+
+#play-again{
+    font-size: 40px;
+    font-family: "Jersey 15", sans-serif;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    margin-top: -70px;
+    padding: 10px 40px;
+    background-color: rgb(0, 126, 25);
+}
