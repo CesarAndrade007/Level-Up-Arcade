@@ -1,10 +1,11 @@
-## Level-Up Arcade!
-
+# Level-Up Arcade!
+## Introduction
 I created an arcade website that attracts an audience of mostly young adults that want to play games that bring them back to simpler times in their life.
 This arcade website only features four games at the moment, but they're filled with a lot of action and excitement!
 
 ![image](https://github.com/CesarAndrade007/Level-Up-Arcade/assets/108037193/88751560-01e6-438a-9c47-6f52bd63da10)
 
+## Mobile-first Approach
 Using vanilla JavaScript, I built these games and ensured that they were functional on mobile devices as well. A mobile-first approach was considered
 throughout the development of this website and the games. As you can see in space invaders, when the screen size is of mobile, the user has the ability
 to press certain controls to move the spaceship. You also see that in the memory card game that the cards adjust to the screen and allow for the user
