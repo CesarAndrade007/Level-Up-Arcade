@@ -27,6 +27,8 @@
 .game-selection {
     padding-top: 120px;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 30px;
     animation: slidein 2s forwards;
 }
