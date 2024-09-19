@@ -27,9 +27,8 @@
 .game-selection {
     padding-top: 120px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
+    gap: 50px;
     animation: slidein 2s forwards;
 }
 
@@ -69,14 +68,11 @@
 .home-play-button {
     background-color: rgb(2, 144, 0);
     position: relative;
-    border-radius: 200px;
     border-style: none;
     padding: 10px;
     margin-bottom: 15px;
     bottom: 0;
-    top: 0;
     z-index: 1000;
-    box-shadow: 0 0 90px rgb(51, 255, 0);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -94,30 +90,30 @@
         box-shadow: none;
     }
     .game-selection {
-        padding-bottom: 120px;
-        flex-direction: column;
-        gap: 60px;
+        padding-bottom: 80px;
+        flex-wrap: wrap;
+        gap: 20px;
     }
     .game-title {
-        font-size: 90px;
-        width: 75%;
+        width: 30vw;
+        font-size: 50px;
         padding: 5px;
     }
     .game-description {
         color: white;
-        font-size: 40px;
+        font-size: 25px;
         margin-top: -20px;
     }
     .card-container {
-        width: 100%;
-        padding: 5px 15px;
+        width: 40vw;
+        padding: 10px;
     }
     .home-play-button {
         margin-top: -20px;
-        width: 70%;
+        width: 200px;
         text-align: center;
-        padding: 30px 60px;
-        font-size: 30px;
+        padding: 20px;
+        font-size: 20px;
         margin-bottom: 15px;
     }
 }
